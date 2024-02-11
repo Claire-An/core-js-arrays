@@ -349,8 +349,12 @@ function calculateBalance(arr) {
  *    createChunks(['a', 'b', 'c', 'd', 'e'], 2) => [['a', 'b'], ['c', 'd'], ['e']]
  *    createChunks([10, 20, 30, 40, 50], 1) => [[10], [20], [30], [40], [50]]
  */
-function createChunks(/* arr, chunkSize */) {
-  throw new Error('Not implemented');
+function createChunks(arr, chunkSize) {
+  const countChunks = Math.ceil(arr.length / chunkSize);
+  const result = new Array(countChunks).fill(0).map((item, index) => {
+    return arr.slice(index * chunkSize, index * chunkSize + chunkSize);
+  });
+  return result;
 }
 
 /**
@@ -381,8 +385,9 @@ function generateOdds(len) {
  *   getElementByIndices(['one','two','three'], [2]) => 'three'  (arr[2])
  *   getElementByIndices([[[ 1, 2, 3]]], [ 0, 0, 1 ]) => 2        (arr[0][0][1])
  */
-function getElementByIndices(/* arr, indices */) {
-  throw new Error('Not implemented');
+function getElementByIndices(arr, indices) {
+  if (indices.length === 1) return arr[indices[0]];
+  return getElementByIndices(arr[indices[0]], indices.slice(1));
 }
 
 /**
